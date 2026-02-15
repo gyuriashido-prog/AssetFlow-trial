@@ -120,12 +120,15 @@ nav {
    4. FEATURES SECTION STYLES
    ========================================= */
 .features-section {
-    padding: 100px 20px;
+    min-height: 100vh; /* This forces the section to be at least the full height of the screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the content vertically within that full height */
+    padding: 80px 20px; /* Maintains padding for mobile spacing */
     background-color: #0f1014;
     position: relative;
     z-index: 5;
 }
-
 .section-header { text-align: center; margin-bottom: 60px; }
 
 .section-title {
