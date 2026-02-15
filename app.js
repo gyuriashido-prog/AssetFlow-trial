@@ -1,23 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* 1. REFRESH TO TOP LOGIC */
-    // Forces the browser to ignore previous scroll position on refresh
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-
-    /* 2. STICKY NAV BACKGROUND TOGGLE */
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    });
-
-    /* 3. MOBILE VIEWPORT HEIGHT FIX */
+    /* 1. MOBILE VIEWPORT HEIGHT FIX */
     const setAppHeight = () => {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -25,7 +8,32 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('resize', setAppHeight);
     setAppHeight();
 
-    /* 4. HERO CLICK REDIRECT */
+    /* 2. MOBILE REFRESH -> LOAD HOME PAGE (Scroll to Top) */
+    // This ensures if a user refreshes anywhere, they start at the top
+    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+        window.scrollTo(0, 0);
+    }
+
+    /* 3. SMOOTH SCROLLING */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                // Offset calculation for the sticky navbar
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    /* 4. HERO INTERACTION */
     const heroSection = document.getElementById('hero-trigger');
     if (heroSection) {
         heroSection.addEventListener('click', (e) => {
@@ -35,14 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* 5. SMOOTH SCROLLING */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+    /* 5. LOGIN WRAPPER LOGIC */
+    const loginWrapper = document.querySelector('.login-wrapper');
+    const loginCard = document.querySelector('.login-card');
+    if (loginWrapper && loginCard) {
+        loginWrapper.addEventListener('click', (e) => {
+            if (!loginCard.contains(e.target)) {
+                window.location.href = 'index.html';
             }
         });
-    });
+    }
 });
