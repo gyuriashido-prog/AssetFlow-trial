@@ -35,6 +35,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
+/* 6. SIGN UP ID SCANNER LOGIC */
+const idInput = document.getElementById('identifier-id');
+if (idInput) {
+    idInput.addEventListener('change', () => {
+        console.log("ID Scanned: " + idInput.value);
+        // You can add logic here to verify the ID or move focus to the next field
+    });
+}
+
+
     /* 4. HERO INTERACTION */
     const heroSection = document.getElementById('hero-trigger');
     if (heroSection) {
