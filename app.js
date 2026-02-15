@@ -1,6 +1,5 @@
-// Paste your actual config here
 const firebaseConfig = {
-  apiKey: "AIzaSyAzd_EiWwKBK5ikNPc4gxaR8BDm3tyZZCM",
+  apiKey: "AIzaSyAzd_EIwWKBK5ikNPc4gxaR8BDm3tyZZCM",
   authDomain: "roleandaccess.firebaseapp.com",
   projectId: "roleandaccess",
   storageBucket: "roleandaccess.firebasestorage.app",
