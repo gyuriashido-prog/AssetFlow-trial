@@ -1,8 +1,12 @@
+/* =========================================
+   1. GLOBAL RESET & VARIABLES
+   ========================================= */
 :root {
     --vh: 1vh;
     --bg-color: #0f1014;
     --accent-color: #64ffda;
     --text-white: #ffffff;
+    --nav-height: 80px; /* Fixed height for sticky nav logic */
 }
 
 * {
@@ -18,58 +22,64 @@ body {
     background-color: var(--bg-color);
     color: var(--text-white);
     font-family: 'Montserrat', sans-serif;
-    height: 100vh; 
-    height: calc(var(--vh, 1vh) * 100);
-    overflow-y: auto; 
     overflow-x: hidden;
     display: block; 
     position: relative; 
     width: 100%;
 }
 
-a { text-decoration: none; color: inherit; transition: 0.3s; }
-.accent-text { color: var(--accent-color) !important; }
+/* =========================================
+   2. STICKY NAVIGATION
+   ========================================= */
+nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-height);
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 40px;
+    z-index: 1000;
+    /* Frosted glass effect to keep it visible while scrolling */
+    background: rgba(15, 16, 20, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
 
 .logo-box {
     width: 50px; height: 50px;
     border: 2px solid white;
     display: flex; align-items: center; justify-content: center;
     font-weight: 900; font-size: 20px; letter-spacing: 2px;
-    cursor: pointer;
-}
-
-.fade-in {
-    opacity: 0;
-    animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.container {
-    width: 100%; 
-    min-height: 100vh; 
-    height: calc(var(--vh, 1vh) * 100); 
-    position: relative;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-}
-
-nav {
-    position: fixed; /* Sticky navigation */
-    top: 25px; left: 25px; right: 25px;
-    display: flex; justify-content: space-between; align-items: center; 
-    z-index: 100;
 }
 
 .menu a {
     font-size: 11px; letter-spacing: 2px; margin-left: 20px; 
     text-transform: uppercase; opacity: 0.7;
+    transition: 0.3s;
 }
-.menu a:hover { opacity: 1; }
+.menu a:hover { opacity: 1; color: var(--accent-color); }
+.accent-text { color: var(--accent-color) !important; opacity: 1 !important; }
 
-.hero { text-align: center; cursor: pointer; z-index: 2; padding: 0 15px; }
+/* =========================================
+   3. HERO & CONTAINER
+   ========================================= */
+.container {
+    width: 100%; 
+    min-height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+}
+
+.hero { 
+    text-align: center; 
+    cursor: pointer; 
+    z-index: 2; 
+    padding: 0 15px;
+    margin-top: var(--nav-height); /* Offset for the sticky nav */
+}
 
 .main-title {
     font-size: clamp(2.5rem, 12vw, 6rem);
@@ -87,13 +97,19 @@ nav {
     font-size: 12px; letter-spacing: 6px; margin-top: 20px; text-transform: uppercase; opacity: 0.8;
 }
 
-.tap-hint {
-    margin-top: 25px; font-size: 10px; opacity: 0.4; letter-spacing: 1px;
+.fade-in {
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* UI Elements */
 .bottom-left { position: absolute; bottom: 30px; left: 30px; z-index: 10; }
 .bottom-right { position: absolute; bottom: 40px; right: 30px; z-index: 10; }
-
 .social-icons { display: flex; flex-direction: column; gap: 20px; }
 .social-icons a { font-size: 16px; opacity: 0.5; }
 
@@ -104,21 +120,20 @@ nav {
 .scroll-indicator span { font-size: 10px; letter-spacing: 3px; opacity: 0.5; margin-right: 15px; text-transform: uppercase; }
 .scroll-indicator .line { width: 30px; height: 1px; background: white; opacity: 0.3; }
 
+/* =========================================
+   4. SECTIONS (FEATURES & ASSETS)
+   ========================================= */
 .features-section {
     padding: 100px 20px;
-    background-color: #0f1014;
-    position: relative;
-    z-index: 5;
+    background-color: var(--bg-color);
 }
 
 .section-header { text-align: center; margin-bottom: 60px; }
-
 .section-title {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 900;
     letter-spacing: -1px;
     text-transform: uppercase;
-    margin-bottom: 10px;
 }
 
 .features-grid {
@@ -134,38 +149,34 @@ nav {
     padding: 40px 30px;
     border: 1px solid #2a2d35;
     border-radius: 6px;
-    transition: all 0.3s ease;
-    cursor: default;
+    transition: 0.3s ease;
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
     border-color: var(--accent-color);
-    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
 }
 
-.feature-icon {
-    font-size: 2.5rem; color: var(--accent-color); margin-bottom: 25px;
-}
+.feature-icon { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 25px; }
+.feature-title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; }
+.feature-desc { font-size: 0.9rem; line-height: 1.6; color: #8892b0; }
 
-.feature-title {
-    font-size: 1.1rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 2px; margin-bottom: 15px; color: #fff;
-}
-
-.feature-desc {
-    font-size: 0.9rem; line-height: 1.6; color: #8892b0;
-}
-
-/* MOBILE RESPONSIVE TWEAKS */
+/* =========================================
+   5. MOBILE RESPONSIVE
+   ========================================= */
 .mobile-only { display: none; }
 
 @media (max-width: 768px) {
+    :root { --nav-height: 70px; }
     .desktop-only { display: none; }
     .mobile-only { display: block; }
-    nav { top: 20px; left: 20px; right: 20px; }
-    .bottom-left { bottom: 20px; left: 20px; }
+    
+    nav { padding: 0 20px; }
+    .logo-box { width: 40px; height: 40px; font-size: 16px; }
+    
+    .bottom-left { bottom: 20px; left: 20px; position: fixed; }
     .social-icons { flex-direction: row; } 
+    
     .features-section { padding: 60px 20px; }
     .feature-card { padding: 30px 20px; }
 }
