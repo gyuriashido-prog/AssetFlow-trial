@@ -1,3 +1,16 @@
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.appspot.com",
+  messagingSenderId: "your-id",
+  appId: "your-app-id"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -65,3 +78,39 @@ if (idInput) {
         });
     }
 });
+
+const signupForm = document.getElementById('signup-form');
+
+if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // 1. Capture the values from your specific fields
+        const idNumber = document.getElementById('identifier-id').value;
+        const fullName = signupForm.querySelector('input[placeholder="Full Name"]').value;
+        const company = signupForm.querySelector('input[placeholder="Company Name"]').value;
+        const email = signupForm.querySelector('input[placeholder="Email Address"]').value;
+        const password = "CreateAPasswordField123"; // Ensure you add a password input to your HTML
+
+        // 2. Create the User in Firebase Authentication
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // 3. Store the Profile Data in Firestore
+                // We use the unique User UID as the document name
+                return db.collection("users").doc(userCredential.user.uid).set({
+                    identifierID: idNumber,
+                    name: fullName,
+                    company: company,
+                    email: email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            })
+            .then(() => {
+                alert("Account created and ID registered!");
+                window.location.href = 'index.html'; // Redirect to home
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+            });
+    });
+}
