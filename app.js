@@ -1,18 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* 1. MOBILE REFRESH TO HOME (SCROLL TO TOP) */
-    // This logic ensures if the user refreshes on a mobile device, 
-    // it resets the scroll to the top of the page.
-    window.onbeforeunload = function () {
-        if (window.innerWidth <= 768) {
-            window.scrollTo(0, 0);
-        }
-    };
-
-    // Force scroll top on actual load/refresh
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
-    } else {
+    /* 1. MOBILE REFRESH LOGIC (Force Home position) */
+    // This detects if the page is being reloaded and forces scroll to top.
+    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
         window.scrollTo(0, 0);
     }
 
@@ -24,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('resize', setAppHeight);
     setAppHeight();
 
-
-    /* 3. SMOOTH SCROLLING WITH NAV OFFSET */
+    /* 3. SMOOTH SCROLLING FOR NAV LINKS */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -33,30 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                const navHeight = document.querySelector('nav').offsetHeight;
-                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
     });
 
-
-    /* 4. HERO CLICK -> LOGIN REDIRECT */
+    /* 4. HERO REDIRECT (Index -> Login) */
     const heroSection = document.getElementById('hero-trigger');
     if (heroSection) {
         heroSection.addEventListener('click', (e) => {
-            // Don't redirect if clicking an actual link or button inside hero
             if (e.target.closest('a') || e.target.closest('button')) return; 
             window.location.href = 'login.html';
         });
     }
 
-
-    /* 5. LOGIN WRAPPER CLICK -> HOME REDIRECT */
+    /* 5. LOGIN WRAPPER REDIRECT (Background -> Home) */
     const loginWrapper = document.querySelector('.login-wrapper');
     const loginCard = document.querySelector('.login-card');
     if (loginWrapper && loginCard) {
