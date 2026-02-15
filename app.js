@@ -16,20 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
     setAppHeight();
 
 
-    /* 3. SMOOTH SCROLLING */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+/* 3. SMOOTH SCROLLING */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevents the browser from "jumping" instantly
+        const targetId = this.getAttribute('href');
+        
+        // If targetId is just "#", it scrolls to the top
+        const targetSection = targetId === "#" ? document.body : document.querySelector(targetId);
+        
+        if (targetSection) {
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     });
+});
 
 
     /* 4. HERO INTERACTION */
