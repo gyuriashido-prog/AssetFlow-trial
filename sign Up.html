@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AssetFlow | Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container login-wrapper">
+    <div class="login-card" style="max-width: 450px;">
+        <span class="small-tag">GET STARTED</span>
+        <h2 class="main-title-small">CREATE ACCOUNT</h2>
+        
+        <form id="signup-form">
+            <div class="input-group" style="position: relative; margin-bottom: 25px;">
+                <input type="text" id="identifier-id" placeholder="Scan or Enter ID Number" required 
+                       style="border: 1px solid var(--accent-color); box-shadow: 0 0 10px rgba(100, 255, 218, 0.1);">
+                <small style="color: var(--accent-color); font-size: 10px; letter-spacing: 1px; display: block; margin-top: -10px; margin-bottom: 10px; text-align: left;">
+                    PRIMARY SYSTEM IDENTIFIER
+                </small>
+            </div>
+
+            <div class="input-group">
+                <input type="text" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" placeholder="Company Name" required>
+            </div>
+
+            <div class="input-group">
+                <input type="email" placeholder="Email Address" required>
+            </div>
+
+            <button type="submit" class="login-button">Register Account</button>
+        </form>
+
+        <div class="form-footer">
+            <a href="login.html">Already a member?</a>
+            <a href="index.html">Back to Home</a>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
