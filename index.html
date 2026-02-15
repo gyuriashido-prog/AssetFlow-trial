@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AssetFlow | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav id="main-nav">
+    <div class="logo">
+        <a href="index.html">
+            <div class="logo-box">AF</div>
+        </a>
+    </div>
+    
+    <div class="menu desktop-only">
+        <a href="#features">Features</a>
+        <a href="#">Assets</a>
+        <a href="login.html" class="accent-text">Login</a>
+    </div>
+    
+    <div class="menu mobile-only">
+        <a href="login.html" class="accent-text">Log In</a>
+    </div>
+</nav>
+
+<div class="container home-wrapper">
+    <main class="hero" id="hero-trigger">
+        <p class="fade-in small-tag">BEYOND WAREHOUSING</p>
+        <h1 class="fade-in main-title">ASSETFLOW</h1>
+        <p class="fade-in subtitle">Track. Manage. Scale.</p>
+        <div class="tap-hint mobile-only fade-in">(Tap to Enter)</div>
+    </main>
+
+    <div class="bottom-left">
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fas fa-headset"></i></a>
+            <a href="mailto:support@assetflow.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <div class="bottom-right desktop-only">
+        <div class="scroll-indicator">
+            <span>Sequence</span>
+            <div class="line"></div>
+        </div>
+    </div>
+</div>
+
+<section id="features" class="features-section">
+    <div class="section-header">
+        <span class="small-tag">SYSTEM CAPABILITIES</span>
+        <h2 class="section-title">Core Features</h2>
+        <div class="line" style="width: 60px; height: 3px; background: #64ffda; margin: 20px auto;"></div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-boxes-stacked"></i></div>
+            <h3 class="feature-title">Asset Management</h3>
+            <p class="feature-desc">Centralized control over your entire inventory. Retrieve asset data instantly.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+            <h3 class="feature-title">Real-Time Sync</h3>
+            <p class="feature-desc">Data synchronizes across all devices instantly, ensuring the latest status.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-location-crosshairs"></i></div>
+            <h3 class="feature-title">Precision Tracking</h3>
+            <p class="feature-desc">Monitor asset movement lifecycles from acquisition to disposal.</p>
+        </div>
+    </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
